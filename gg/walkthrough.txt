@@ -1,0 +1,138 @@
+# gg - Git Learning CLI Tool Walkthrough
+
+This walkthrough demonstrates the core features of gg, showing how it visualizes advanced data structures while performing Git-like operations.
+
+## Basic Workflow
+
+### 1. Initialize a Repository
+
+```
+$ gg vibe
+[gg] Repository initialized.
+Ready to vibe responsibly. Or not.
+```
+
+This creates a `.gg` folder with the necessary structure:
+- Initializes an empty DAG with root commit
+- Creates main branch in the AVL tree
+- Sets up an empty Trie for file tracking
+- Initializes the Bloom Filter
+
+### 2. Add a File
+
+```
+$ echo "Hello, world!" > hello.txt
+$ gg add hello.txt
+[gg] Staged hello.txt.
+If this crashes, just blame it on 'works on my machine.'
+```
+
+This demonstrates:
+- Updating the Trie data structure with the new file path
+- Setting file status to STAGED
+- Adding the file to the Bloom Filter for quick existence checks
+
+### 3. Commit Changes
+
+```
+$ gg kermit -m "Initial commit"
+[gg] Kermit successful: "Initial commit"
+Commit ID: a1b2c3d4
+A legendary commit. Or a legendary disaster. Time will tell.
+```
+
+This shows:
+- Creating a new node in the DAG
+- Linking it to the previous HEAD
+- Updating the Skip List for commit traversal
+- Updating file status in the Trie from STAGED to COMMITTED
+
+### 4. Check Status
+
+```
+$ gg status
+[gg] Status check complete.
+Here's what you broke today. Congratulations.
+```
+
+This displays:
+- Current branch from the AVL tree
+- HEAD commit from the DAG
+- Staged, modified, and untracked files using the Trie
+- Bloom Filter visualization for file existence
+
+### 5. Create a Branch
+
+```
+$ gg branch feature
+[gg] Created branch 'feature'
+New branch created. More timelines, more ways to fail gloriously.
+```
+
+This demonstrates:
+- Inserting a new node into the AVL tree
+- Tree rotations if necessary to maintain balance
+- Branch pointing to the current HEAD commit
+
+### 6. View Log
+
+```
+$ gg log
+[gg] Showing commit history.
+From small beginnings come large bugs.
+```
+
+This shows:
+- Traversing the DAG using BFS
+- Using the Skip List for efficient history navigation
+- Visualizing the commit graph structure
+
+### 7. Merge Branches
+
+```
+$ echo "New feature" > feature.txt
+$ gg add feature.txt
+$ gg kermit -m "Add feature"
+$ gg branch main
+$ gg merge feature
+[gg] Merged branch 'feature' into 'main'
+Merge commit: e5f6g7h8
+Merge completed. No conflicts detected. Either you're lucky or something's missing.
+```
+
+This demonstrates:
+- Creating a merge commit with multiple parents in the DAG
+- Using Disjoint Sets for handling potential conflicts
+- Updating multiple data structures simultaneously
+
+### 8. Learn About Data Structures
+
+```
+$ gg learn dag
+[gg] Learning: DAGs
+- No cycles allowed. It's not your friend group drama.
+- Fast traversal with skip lists.
+- Beautiful, chaotic, and surprisingly efficient.
+```
+
+The learn command provides interactive tutorials on:
+- Directed Acyclic Graphs (DAG)
+- Tries
+- AVL Trees
+- Skip Lists
+- Disjoint Sets
+- Bloom Filters
+
+Each tutorial includes ASCII visualizations and animations that show how the data structures work and how they're used within the gg system.
+
+## Advanced Visualization Features
+
+Throughout all operations, gg provides live ASCII art visualizations of:
+- DAG nodes and edges for the commit graph
+- Trie structure showing file paths
+- AVL tree rotations for branch operations
+- Skip List levels and shortcuts
+- Disjoint Set merging for conflict resolution
+- Bloom Filter bit array and hash functions
+
+The visualizations use ncurses to create dynamic, interactive displays that help users understand the underlying data structures that power version control systems.
