@@ -7,9 +7,9 @@ This walkthrough demonstrates the core features of gg, showing how it visualizes
 ### 1. Initialize a Repository
 
 ```
-$ gg vibe
+$ gg bruh
 [gg] Repository initialized.
-Ready to vibe responsibly. Or not.
+Ready to bruh responsibly. Or not.
 ```
 
 This creates a `.gg` folder with the necessary structure:

@@ -28,7 +28,7 @@ void show_help() {
     std::cout << "gg - A Visual Git Learning Tool\n\n";
     std::cout << "Usage: gg <command> [options]\n\n";
     std::cout << "Commands:\n";
-    std::cout << "  vibe                Initialize a new gg repository\n";
+    std::cout << "  bruh                Initialize a new gg repository\n";
     std::cout << "  add <file>          Stage file for commit\n";
     std::cout << "  kermit -m <msg>     Commit staged changes\n";
     std::cout << "  commit -m <msg>     Same as kermit\n";
@@ -54,7 +54,7 @@ void show_version() {
 
 // Command dispatcher table
 std::map<std::string, std::function<bool(int, char**)>> command_table = {
-    {"vibe", init_command},
+    {"bruh", init_command},
     {"add", add_command},
     {"kermit", commit_command},
     {"commit", commit_command},

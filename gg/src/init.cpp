@@ -1,5 +1,5 @@
 /**
- * init.cpp - Implementation of the 'gg vibe' command
+ * init.cpp - Implementation of the 'gg bruh' command
  * 
  * Initializes a gg repository by creating a .gg folder with necessary
  * configuration and data structure initialization.
@@ -22,8 +22,8 @@
 namespace fs = std::filesystem;
 
 // Quips for repository initialization
-const std::vector<std::string> QuipGenerator::vibe_quips = {
-    "Ready to vibe responsibly. Or not.",
+const std::vector<std::string> QuipGenerator::bruh_quips = {
+    "Ready to bruh responsibly. Or not.",
     "Repository initialized. Now go break something.",
     "gg repo created. It's not a phase, mom, it's version control.",
     "Initialization complete. Let the chaos begin.",
@@ -140,7 +140,7 @@ bool init_repository() {
     attroff(COLOR_PAIR(COLOR_SUCCESS));
     
     // Display a random quip
-    mvprintw(25, 2, "%s", QuipGenerator::get_random_quip(QuipGenerator::vibe_quips).c_str());
+    mvprintw(25, 2, "%s", QuipGenerator::get_random_quip(QuipGenerator::bruh_quips).c_str());
     
     // Refresh and wait for user input
     refresh();
@@ -156,7 +156,7 @@ bool init_repository() {
     return true;
 }
 
-// Command handler for 'gg vibe'
+// Command handler for 'gg bruh'
 bool init_command(int argc, char* argv[]) {
     return init_repository();
 }

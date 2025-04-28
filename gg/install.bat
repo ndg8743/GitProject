@@ -144,7 +144,7 @@ if %errorLevel% equ 0 (
     echo   bin\gg [command] [options]
     echo.
     echo Try some of these commands to get started:
-    echo   bin\gg vibe                    # Initialize a new repository
+    echo   bin\gg bruh                    # Initialize a new repository
     echo   bin\gg add [file]              # Stage a file
     echo   bin\gg kermit -m "message"     # Commit changes
     echo   bin\gg learn dag               # Learn about DAGs

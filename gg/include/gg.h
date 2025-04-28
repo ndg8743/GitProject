@@ -83,7 +83,7 @@ void refresh_display();
 // Funny quips generator
 class QuipGenerator {
 public:
-    static const std::vector<std::string> vibe_quips;
+    static const std::vector<std::string> bruh_quips;
     static const std::vector<std::string> add_quips;
     static const std::vector<std::string> commit_quips;
     static const std::vector<std::string> status_quips;

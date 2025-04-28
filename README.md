@@ -112,7 +112,7 @@ gg [command] [options]
 
 ## Commands
 
-- `gg vibe` - Initialize a new repository
+- `gg bruh` - Initialize a new repository
 - `gg add <file>` - Stage a file for commit
 - `gg kermit -m "message"` - Commit staged changes (alias: `gg commit`)
 - `gg status` - Show repository status
@@ -134,7 +134,7 @@ gg [command] [options]
 
 ```bash
 # Initialize a new repository
-gg vibe
+gg bruh
 
 # Create and stage a file
 echo "Hello, world!" > hello.txt
@@ -171,7 +171,7 @@ gg/
 │   └── bloom.h          # Bloom filter for file existence
 ├── src/                 # Source files
 │   ├── main.cpp         # CLI entrypoint, argument parsing
-│   ├── init.cpp         # Implements gg vibe
+│   ├── init.cpp         # Implements gg bruh
 │   ├── add.cpp          # Implements gg add
 │   ├── kermit.cpp       # Implements gg kermit / gg commit
 │   ├── status.cpp       # Implements gg status
