@@ -6,6 +6,31 @@ A command-line based version control system that teaches Git concepts visually t
 
 `gg` is an educational tool designed to help users learn version control concepts and understand the data structures that power Git. It uses ASCII art and live visualizations through the ncurses library to illustrate how repositories, commits, branches, and merges work behind the scenes.
 
+## Quick Start (One-Command Installation)
+
+### On Linux/macOS:
+```bash
+# Download and run the installer
+git clone https://github.com/yourusername/gg.git
+cd gg
+chmod +x install.sh
+./install.sh
+```
+
+### On Windows:
+```
+# Download the repository
+git clone https://github.com/yourusername/gg.git
+cd gg
+
+# Right-click on install.bat and select "Run as administrator"
+```
+
+The installation script will automatically:
+1. Check for and install required dependencies (C++ compiler, ncurses)
+2. Compile the project
+3. Provide instructions for getting started
+
 ## Features
 
 - Visual demonstrations of repository operations
@@ -48,7 +73,7 @@ A command-line based version control system that teaches Git concepts visually t
    - Used for fast file existence checking
    - Shows trade-offs between space and accuracy
 
-## Compilation Instructions
+## Manual Compilation Instructions
 
 ### Requirements
 
@@ -155,9 +180,21 @@ gg/
 │   ├── merge.cpp        # Implements gg merge
 │   └── learn.cpp        # Implements gg learn
 ├── obj/                 # Object files (generated)
+├── install.sh           # Automated installer for Linux/macOS
+├── install.bat          # Automated installer for Windows
 ├── Makefile             # Build script
 └── README.md            # This file
 ```
+
+## For Complete Beginners
+
+If you're completely new to programming and terminals, simply:
+
+1. Download the project
+2. Run the installer for your operating system:
+   - On Windows: Double-click `install.bat` and follow the prompts
+   - On Mac/Linux: Open Terminal, navigate to the gg folder, and run `./install.sh`
+3. The installer will set up everything needed to run gg
 
 ## Notes
 
