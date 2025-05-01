@@ -23,13 +23,34 @@ chmod +x install.sh
 git clone https://github.com/yourusername/gg.git
 cd gg
 
+# Either:
+# Option 1: Run the installer (requires admin privileges)
 # Right-click on install.bat and select "Run as administrator"
+
+# Option 2: Use the simplified build script (no admin required)
+run_windows.bat
 ```
 
 The installation script will automatically:
-1. Check for and install required dependencies (C++ compiler, ncurses)
-2. Compile the project
+1. Check for and install required dependencies (C++ compiler, ncurses when available)
+2. Compile the project (with proper compatibility settings for your OS)
 3. Provide instructions for getting started
+
+### Running Without ncurses (Text-Only Mode)
+
+If you're on a system that doesn't support ncurses (like some Windows environments), gg automatically falls back to a text-only mode that uses simplified terminal output instead of advanced visualizations. This mode provides the same educational value and functionality but with basic text output instead of ASCII art.
+
+To explicitly build in text-only mode, use:
+
+```bash
+# On Linux/macOS
+make NCURSES_DISABLED=1
+
+# On Windows
+build_windows.bat
+```
+
+This creates a more portable version that works across virtually all terminal environments.
 
 ## Features
 
@@ -192,12 +213,38 @@ If you're completely new to programming and terminals, simply:
 
 1. Download the project
 2. Run the installer for your operating system:
-   - On Windows: Double-click `install.bat` and follow the prompts
+   - On Windows: Double-click `install.bat` or `run_windows.bat` and follow the prompts
    - On Mac/Linux: Open Terminal, navigate to the gg folder, and run `./install.sh`
 3. The installer will set up everything needed to run gg
+
+## Troubleshooting
+
+### Windows Issues
+- If you see "Not a valid Win32 application" error, try rebuilding with `run_windows.bat`
+- You may need to install a C++ compiler:
+  - MinGW-w64: Download and install from [MinGW website](https://www.mingw-w64.org/)
+  - Visual Studio Community: Install with "Desktop development with C++" workload
+  
+### Linux/macOS Issues
+- Missing ncurses: Install with `apt-get install libncurses-dev` (Ubuntu/Debian) or `brew install ncurses` (macOS)
+- Permission denied: Run `chmod +x install.sh` to make the installer executable
+
+## Future Enhancements
+
+Some planned improvements for future versions:
+
+- **Web Interface**: Browser-based visualization option for systems without ncurses
+- **Interactive Tutorials**: Expanding the `learn` command with hands-on exercises
+- **Comparison Mode**: Side-by-side comparison between gg commands and Git equivalents
+- **Performance Metrics**: Display algorithm efficiency data during operations
+- **Red-Black Trees**: Implementation as an alternative to AVL Trees
+- **Configuration System**: For customizing colors, animation speed, and verbosity
+- **Visual Diffs**: Highlighting file changes when committing
+- **Project Export**: Generate SVG/PNG visualizations of repository structure
 
 ## Notes
 
 - This is an educational tool, not a production-grade version control system
 - It focuses on visualizing and explaining the data structures behind Git
 - The storage format is not compatible with Git
+- The latest version includes improved Windows compatibility and a text-only fallback mode

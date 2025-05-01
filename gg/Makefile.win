@@ -1,0 +1,43 @@
+# Windows Makefile for gg - a command-line based version control system
+# Use with nmake (Visual Studio Command Prompt)
+
+# Compiler and flags
+CXX = cl
+CXXFLAGS = /nologo /EHsc /std:c++17 /I".\include" /D"NCURSES_DISABLED" /D"_SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING"
+LDFLAGS = 
+
+# Directories
+SRC_DIR = src
+INCLUDE_DIR = include
+OBJ_DIR = obj
+BIN_DIR = bin
+
+# Target
+TARGET = $(BIN_DIR)\gg.exe
+
+# Default target
+all: directories $(TARGET)
+
+# Create necessary directories
+directories:
+	@if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
+	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
+
+# Link objects into executable
+$(TARGET): $(OBJ_DIR)\main.obj $(OBJ_DIR)\stubs.obj
+	$(CXX) /Fe:$(TARGET) $(OBJ_DIR)\main.obj $(OBJ_DIR)\stubs.obj $(LDFLAGS)
+
+# Compile source files into object files
+$(OBJ_DIR)\main.obj: $(SRC_DIR)\main.cpp
+	$(CXX) $(CXXFLAGS) /c $(SRC_DIR)\main.cpp /Fo$(OBJ_DIR)\main.obj
+
+$(OBJ_DIR)\stubs.obj: $(SRC_DIR)\stubs.cpp
+	$(CXX) $(CXXFLAGS) /c $(SRC_DIR)\stubs.cpp /Fo$(OBJ_DIR)\stubs.obj
+
+# Clean rule
+clean:
+	@if exist $(OBJ_DIR) rmdir /S /Q $(OBJ_DIR)
+	@if exist $(BIN_DIR) rmdir /S /Q $(BIN_DIR)
+
+# Phony targets
+.PHONY: all clean directories

@@ -6,6 +6,11 @@ echo ========================================
 echo gg - Git Learning CLI Tool Installer
 echo ========================================
 echo.
+echo This script requires administrator privileges to install dependencies.
+echo.
+echo If you don't have admin rights or just want to build without dependencies,
+echo consider using run_windows.bat instead for a simplified build process.
+echo.
 
 :: Check if running as administrator
 net session >nul 2>&1

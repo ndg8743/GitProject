@@ -23,6 +23,13 @@ typedef struct _win_st WINDOW;
 #include <cstdlib>
 #include <memory>
 
+#ifdef _WIN32
+#include <windows.h>
+#define PATH_SEPARATOR '\\'
+#else
+#define PATH_SEPARATOR '/'
+#endif
+
 // BranchInfo implementation
 BranchInfo::BranchInfo(const std::string& name, const std::string& commit_id, 
                       const std::string& creation_time) {

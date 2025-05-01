@@ -19,6 +19,15 @@
 #include <algorithm>
 #include <filesystem>
 
+// Platform-specific settings
+#ifdef _WIN32
+#define PATH_SEPARATOR '\\'
+#define REPO_DIR ".gg"
+#else
+#define PATH_SEPARATOR '/'
+#define REPO_DIR ".gg"
+#endif
+
 // Forward declarations of data structure classes
 class Trie;
 class DAG;
