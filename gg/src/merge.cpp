@@ -8,6 +8,9 @@
 #include "../include/gg.h"
 #include "../include/dag.h"
 #include "../include/disjoint.h"
+#include "../include/avl.h"
+#include "../include/trie.h"
+#include "../include/skiplist.h"
 #include <iostream>
 #include <filesystem>
 #include <vector>

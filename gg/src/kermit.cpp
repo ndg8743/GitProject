@@ -9,6 +9,7 @@
 #include "../include/trie.h"
 #include "../include/dag.h"
 #include "../include/skiplist.h"
+#include "../include/avl.h"
 #include <iostream>
 #include <filesystem>
 #include <sstream>

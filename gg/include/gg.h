@@ -12,7 +12,6 @@
 #include <vector>
 #include <map>
 #include <memory>
-#include <ncurses.h>
 #include <ctime>
 #include <random>
 #include <sstream>
@@ -27,6 +26,13 @@ class AVLTree;
 class SkipList;
 class DisjointSet;
 class BloomFilter;
+
+// Simplified version without ncurses
+#ifdef NCURSES_DISABLED
+typedef struct _win_st WINDOW;
+#else
+#include <ncurses.h>
+#endif
 
 // Colors for ncurses
 enum Color {
@@ -102,5 +108,11 @@ std::vector<std::string> split_string(const std::string& str, char delimiter);
 bool file_exists(const std::string& filepath);
 std::string read_file_contents(const std::string& filepath);
 void write_file_contents(const std::string& filepath, const std::string& contents);
+
+// Learn function declarations
+void learn_dag();
+void learn_trie();
+void learn_avl();
+void learn_skiplist();
 
 #endif // GG_H

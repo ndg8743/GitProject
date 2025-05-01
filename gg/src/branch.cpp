@@ -7,6 +7,7 @@
 
 #include "../include/gg.h"
 #include "../include/avl.h"
+#include "../include/dag.h"
 #include <iostream>
 #include <filesystem>
 #include <vector>

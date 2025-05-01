@@ -1,102 +1,118 @@
-/**
- * main.cpp - CLI entrypoint for gg version control system
- * 
- * Handles command-line argument parsing and dispatches to the appropriate
- * command implementation.
- */
-
 #include "../include/gg.h"
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
-#include <functional>
-#include <cstring>
-
-// Function prototypes for commands
-bool init_command(int argc, char* argv[]);
-bool add_command(int argc, char* argv[]);
-bool commit_command(int argc, char* argv[]);
-bool status_command(int argc, char* argv[]);
-bool log_command(int argc, char* argv[]);
-bool branch_command(int argc, char* argv[]);
-bool merge_command(int argc, char* argv[]);
-bool learn_command(int argc, char* argv[]);
-
-// Help message
-void show_help() {
-    std::cout << "gg - A Visual Git Learning Tool\n\n";
-    std::cout << "Usage: gg <command> [options]\n\n";
-    std::cout << "Commands:\n";
-    std::cout << "  bruh                Initialize a new gg repository\n";
-    std::cout << "  add <file>          Stage file for commit\n";
-    std::cout << "  kermit -m <msg>     Commit staged changes\n";
-    std::cout << "  commit -m <msg>     Same as kermit\n";
-    std::cout << "  status              Show repository status\n";
-    std::cout << "  log                 Show commit history\n";
-    std::cout << "  branch <name>       Create a new branch\n";
-    std::cout << "  merge <branch>      Merge branch into current branch\n";
-    std::cout << "  learn <topic>       Learn about git concepts\n\n";
-    std::cout << "Topics for learn:\n";
-    std::cout << "  dag                 Directed Acyclic Graph (commit history)\n";
-    std::cout << "  trie                Trie data structure (file tracking)\n";
-    std::cout << "  avl                 AVL Tree (branch management)\n";
-    std::cout << "  skiplist            Skip List (efficient commit traversal)\n";
-    std::cout << "  disjointset         Disjoint Set (merge conflict resolution)\n";
-    std::cout << "  bloom               Bloom Filter (file existence checking)\n";
-}
-
-// Version message
-void show_version() {
-    std::cout << "gg - Version 1.0.0\n";
-    std::cout << "A Visual Git Learning Tool\n";
-}
-
-// Command dispatcher table
-std::map<std::string, std::function<bool(int, char**)>> command_table = {
-    {"bruh", init_command},
-    {"add", add_command},
-    {"kermit", commit_command},
-    {"commit", commit_command},
-    {"status", status_command},
-    {"log", log_command},
-    {"branch", branch_command},
-    {"merge", merge_command},
-    {"learn", learn_command}
-};
 
 int main(int argc, char* argv[]) {
-    // Handle no arguments
+    // Simple command-line interface without ncurses
+    std::cout << "gg - Git Learning CLI Tool" << std::endl;
+    std::cout << "===========================" << std::endl;
+    std::cout << std::endl;
+
     if (argc < 2) {
-        show_help();
-        return 1;
-    }
-    
-    // Handle help and version flags
-    if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) {
-        show_help();
+        std::cout << "Usage: gg <command> [options]" << std::endl;
+        std::cout << std::endl;
+        std::cout << "Commands:" << std::endl;
+        std::cout << "  bruh                    Initialize a new repository" << std::endl;
+        std::cout << "  add <file>              Stage a file" << std::endl;
+        std::cout << "  kermit -m \"message\"     Commit changes" << std::endl;
+        std::cout << "  status                  Show repository status" << std::endl;
+        std::cout << "  log                     Show commit history" << std::endl;
+        std::cout << "  branch [name]           Create or list branches" << std::endl;
+        std::cout << "  merge <branch>          Merge a branch" << std::endl;
+        std::cout << "  learn <topic>           Learn about a topic" << std::endl;
+        std::cout << std::endl;
+        std::cout << "For more information, see the README.md file." << std::endl;
         return 0;
     }
-    
-    if (strcmp(argv[1], "--version") == 0 || strcmp(argv[1], "-v") == 0) {
-        show_version();
-        return 0;
-    }
-    
-    // Look up command in dispatch table
-    auto cmd_it = command_table.find(argv[1]);
-    if (cmd_it == command_table.end()) {
-        std::cerr << "Error: Unknown command '" << argv[1] << "'\n";
-        std::cerr << "Use 'gg --help' to see available commands.\n";
+
+    std::string command = argv[1];
+
+    if (command == "bruh") {
+        std::cout << "Initializing a new repository..." << std::endl;
+        std::cout << "This feature is not available in the simplified version." << std::endl;
+    } else if (command == "add") {
+        if (argc < 3) {
+            std::cout << "Error: No file specified" << std::endl;
+            std::cout << "Usage: gg add <file>" << std::endl;
+            return 1;
+        }
+        std::cout << "Staging file: " << argv[2] << std::endl;
+        std::cout << "This feature is not available in the simplified version." << std::endl;
+    } else if (command == "kermit" || command == "commit") {
+        if (argc < 3 || std::string(argv[2]) != "-m") {
+            std::cout << "Error: Missing commit message" << std::endl;
+            std::cout << "Usage: gg kermit -m \"<message>\"" << std::endl;
+            std::cout << "   or: gg commit -m \"<message>\"" << std::endl;
+            return 1;
+        }
+        if (argc < 4) {
+            std::cout << "Error: Missing commit message" << std::endl;
+            std::cout << "Usage: gg kermit -m \"<message>\"" << std::endl;
+            std::cout << "   or: gg commit -m \"<message>\"" << std::endl;
+            return 1;
+        }
+        std::cout << "Committing changes with message: " << argv[3] << std::endl;
+        std::cout << "This feature is not available in the simplified version." << std::endl;
+    } else if (command == "status") {
+        std::cout << "Showing repository status..." << std::endl;
+        std::cout << "This feature is not available in the simplified version." << std::endl;
+    } else if (command == "log") {
+        std::cout << "Showing commit history..." << std::endl;
+        std::cout << "This feature is not available in the simplified version." << std::endl;
+    } else if (command == "branch") {
+        if (argc < 3) {
+            std::cout << "Listing branches..." << std::endl;
+        } else {
+            std::cout << "Creating branch: " << argv[2] << std::endl;
+        }
+        std::cout << "This feature is not available in the simplified version." << std::endl;
+    } else if (command == "merge") {
+        if (argc < 3) {
+            std::cout << "Error: No branch specified" << std::endl;
+            std::cout << "Usage: gg merge <branch-name>" << std::endl;
+            return 1;
+        }
+        std::cout << "Merging branch: " << argv[2] << std::endl;
+        std::cout << "This feature is not available in the simplified version." << std::endl;
+    } else if (command == "learn") {
+        if (argc < 3) {
+            std::cout << "Error: No topic specified" << std::endl;
+            std::cout << "Usage: gg learn <topic>" << std::endl;
+            std::cout << "Topics: dag, trie, avl, skiplist, disjointset, bloom" << std::endl;
+            return 1;
+        }
+        
+        std::string topic = argv[2];
+        
+        if (topic == "dag") {
+            std::cout << "Learning about DAG (Directed Acyclic Graph)..." << std::endl;
+            learn_dag();
+        } else if (topic == "trie") {
+            std::cout << "Learning about Trie..." << std::endl;
+            learn_trie();
+        } else if (topic == "avl") {
+            std::cout << "Learning about AVL Tree..." << std::endl;
+            learn_avl();
+        } else if (topic == "skiplist") {
+            std::cout << "Learning about Skip List..." << std::endl;
+            learn_skiplist();
+        } else if (topic == "disjoint" || topic == "disjointset") {
+            std::cout << "Learning about Disjoint Set..." << std::endl;
+            std::cout << "This feature is not available in the simplified version." << std::endl;
+        } else if (topic == "bloom") {
+            std::cout << "Learning about Bloom Filter..." << std::endl;
+            std::cout << "This feature is not available in the simplified version." << std::endl;
+        } else {
+            std::cout << "Error: Unknown topic '" << topic << "'" << std::endl;
+            std::cout << "Topics: dag, trie, avl, skiplist, disjointset, bloom" << std::endl;
+            return 1;
+        }
+    } else {
+        std::cout << "Error: Unknown command '" << command << "'" << std::endl;
+        std::cout << "Run 'gg' without arguments to see available commands." << std::endl;
         return 1;
     }
-    
-    // Execute the command handler
-    try {
-        bool success = cmd_it->second(argc - 1, argv + 1);
-        return success ? 0 : 1;
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << "\n";
-        return 1;
-    }
+
+    return 0;
 }

@@ -8,6 +8,8 @@
 #include "../include/gg.h"
 #include "../include/trie.h"
 #include "../include/bloom.h"
+#include "../include/avl.h"
+#include "../include/dag.h"
 #include <iostream>
 #include <filesystem>
 #include <vector>

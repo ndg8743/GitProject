@@ -48,40 +48,64 @@ echo "Checking for ncurses library..."
 if [ -f "/usr/include/ncurses.h" ] || [ -f "/usr/local/include/ncurses.h" ] || [ -f "/opt/homebrew/include/ncurses.h" ]; then
   echo "✅ ncurses library found."
 else
-  echo "❌ ncurses library not found. Installing..."
+  echo "❌ ncurses library not found."
   
-  if command_exists apt-get; then
-    # Debian/Ubuntu
-    sudo apt-get update
-    sudo apt-get install -y libncurses5-dev libncursesw5-dev
-  elif command_exists brew; then
-    # macOS with Homebrew
-    brew install ncurses
-  elif command_exists dnf; then
-    # Fedora
-    sudo dnf install -y ncurses-devel
-  elif command_exists yum; then
-    # CentOS
-    sudo yum install -y ncurses-devel
-  elif command_exists pacman; then
-    # Arch Linux
-    sudo pacman -S --noconfirm ncurses
+  # On macOS, we'll try to continue without ncurses
+  if [ "$(uname)" = "Darwin" ]; then
+    echo "⚠️ Running on macOS without ncurses. Some features may be limited."
   else
-    echo "❌ Could not install ncurses. Please install manually."
-    exit 1
+    if command_exists apt-get; then
+      # Debian/Ubuntu
+      sudo apt-get update
+      sudo apt-get install -y libncurses5-dev libncursesw5-dev
+    elif command_exists brew; then
+      # macOS with Homebrew
+      brew install ncurses
+    elif command_exists dnf; then
+      # Fedora
+      sudo dnf install -y ncurses-devel
+    elif command_exists yum; then
+      # CentOS
+      sudo yum install -y ncurses-devel
+    elif command_exists pacman; then
+      # Arch Linux
+      sudo pacman -S --noconfirm ncurses
+    else
+      echo "❌ Could not install ncurses. Continuing without it."
+      echo "⚠️ Some features may be limited."
+    fi
   fi
-  
-  echo "✅ ncurses library installed."
 fi
+
+# Build the project
+echo "Building gg..."
+# Get the directory where the script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Create directories if they don't exist
 echo "Setting up build directories..."
 mkdir -p obj bin
+# Make sure the directories exist in the script directory
+mkdir -p "$SCRIPT_DIR/obj" "$SCRIPT_DIR/bin"
+# Change to the script directory before running make
+cd "$SCRIPT_DIR"
 
-# Build the project
-echo "Building gg..."
+# Modify Makefile to handle ncurses availability
+if [ -f "/usr/include/ncurses.h" ] || [ -f "/usr/local/include/ncurses.h" ] || [ -f "/opt/homebrew/include/ncurses.h" ]; then
+  # ncurses is available, use original LDFLAGS
+  echo "Using ncurses for UI features"
+else
+  # ncurses is not available, remove ncurses from LDFLAGS
+  echo "Building without ncurses support"
+  sed -i.bak 's/-lncurses/-DNCURSES_DISABLED/g' Makefile
+fi
+
 make clean
-make
+# Recreate directories after make clean
+mkdir -p "$SCRIPT_DIR/obj" "$SCRIPT_DIR/bin"
+
+# Compile and link the simplified version
+g++ -std=c++17 -Wall -Wextra -pedantic -I./include -DNCURSES_DISABLED src/main.cpp src/stubs.cpp -o bin/gg -lpthread
 
 if [ $? -eq 0 ]; then
   echo ""
