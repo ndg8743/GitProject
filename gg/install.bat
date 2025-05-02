@@ -1,6 +1,6 @@
 @echo off
 :: gg - Automated installation script for Windows
-:: This script checks for and installs required dependencies before building the project
+:: Supports local MSYS2 installation as a 'msys2' subfolder or global C:\msys64
 
 echo ========================================
 echo gg - Git Learning CLI Tool Installer
@@ -9,27 +9,28 @@ echo.
 
 :: ADMIN CHECK REMOVED
 
-:: Check for MSYS2/MinGW - we need this for C++ and ncurses on Windows
+:: Determine script root folder
+set "ROOT=%~dp0"
+
+:: Check for MSYS2/MinGW
 echo Checking for MSYS2/MinGW...
-if exist "C:\msys64\mingw64\bin\g++.exe" (
-    echo [OK] MSYS2/MinGW found.
+if exist "%ROOT%msys2\mingw64\bin\g++.exe" (
+    echo [OK] Local MSYS2 found in %ROOT%msys2.
+    call set "PATH=%ROOT%msys2\mingw64\bin;%PATH%"
+) else if exist "C:\msys64\mingw64\bin\g++.exe" (
+    echo [OK] Global MSYS2 found (C:\msys64).
     call set "PATH=C:\msys64\mingw64\bin;%PATH%"
-) else if exist "C:\msys64\mingw32\bin\g++.exe" (
-    echo [OK] MSYS2/MinGW found.
-    call set "PATH=C:\msys64\mingw32\bin;%PATH%"
 ) else (
-    echo [NOT FOUND] MSYS2/MinGW not found.
+    echo [NOT FOUND] MSYS2 not found.
     echo.
-    echo Installing MSYS2 ^(this will download about 100MB^)...
-    powershell -Command "Invoke-WebRequest -Uri https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20210725.exe -OutFile msys2-installer.exe"
-    start /wait msys2-installer.exe
-    del msys2-installer.exe
-    echo.
-    echo Running initial MSYS2 update...
-    C:\msys64\usr\bin\bash -lc "pacman -Syu --noconfirm"
-    echo Installing MinGW toolchain and ncurses...
-    C:\msys64\usr\bin\bash -lc "pacman -S --noconfirm mingw-w64-x86_64-toolchain mingw-w64-x86_64-ncurses make"
+    echo Please install MSYS2 in one of the following ways:
+    echo 1) Download and extract the MSYS2 installer into a subfolder named 'msys2' here
+    echo 2) Or install system-wide to C:\msys64
+    pause
+    exit /b 1
 )
+
+:: Now build the gg tool
 
 echo.
 echo Building gg...
@@ -40,22 +41,15 @@ echo.
 if %errorLevel% equ 0 (
     echo.
     echo ========================================
-    echo [OK] gg has been successfully installed!
+    echo [OK] gg has been successfully built!
     echo ========================================
     echo.
-    echo Now you can run gg using:
-    echo   bin\gg [command] [options]
-    echo.
-    echo Try some of these commands to get started:
-    echo   bin\gg bruh                    # Initialize a new repository
-    echo   bin\gg add [file]              # Stage a file
-    echo   bin\gg kermit -m "message"     # Commit changes
-    echo   bin\gg learn dag               # Learn about DAGs
-    echo.
-    echo For more information, see the README.md file.
+    echo To run, use: bin\gg [command] [options]
+    echo See README.md for details.
 ) else (
-    echo [ERROR] Build failed. Please check the error messages above.
+    echo [ERROR] Build failed. Please check the messages above.
     exit /b 1
 )
 
+echo.
 pause
